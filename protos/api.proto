@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package service_protos;
+
+import "google/api/annotations.proto";
+
+message GetDataRequest {
+  int64 line_number = 1;
+}
+
+message DataResponse {
+  string text = 1;
+}
+
+service DataService {
+  rpc GetByLine(GetDataRequest) returns (DataResponse) {
+      option (google.api.http) = {
+      get: "/lines/{line_number}"
+    };
+  }
+}
